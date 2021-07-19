@@ -9,12 +9,12 @@ const PosterSlider = (props) => {
     return (
         <>
             <div className="flex flex-col  items-start py-2">
-              <h3 className="text-white text-xl font-bold">{props.title}</h3>
-              <p className="text-white text-sm">{props.subtitle}</p>
+              <h3 className={`text-lg font-bold ${props.isDark ? "text-white" : "text-grey-700" }`}>{props.title}</h3>
+              <p className={`text-xl ${props.isDark ? "text-white" : "text-grey-700" }`}>{props.subtitle}</p>
             </div>
            <Slider {...PosterCarouselsetting}>
                 {props.images.map((image) => (
-                    <Poster {...image} isDark/>
+                    <Poster {...image} isDark={props.isDark}/>
                 ))}
             </Slider> 
         </>

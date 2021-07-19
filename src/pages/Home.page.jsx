@@ -28,6 +28,20 @@ function Homepage() {
                 subtitle="Brand new release on every friday"/>
                 </div>
             </div>
+            {/* online streaming events */}
+            <div className="container mx-auto w-4/5 px-4 my-8">
+                <PosterSlider 
+                images={PremiereImages} 
+                title="Online Streaming Events" 
+                isDark={false}/>
+            </div>
+            {/* outdoor events */}
+            <div className="container mx-auto w-4/5 px-4 my-8">
+                <PosterSlider 
+                images={PremiereImages} 
+                title="Outdoor Events" 
+                isDark={false}/>
+            </div>
         </>
     )
 }
