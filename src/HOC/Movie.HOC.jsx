@@ -2,7 +2,6 @@ import React from "react";
 import { Route } from "react-router";
 
 // layout
-
 import Movielayout from "../layouts/Movie.layout";
 
 
