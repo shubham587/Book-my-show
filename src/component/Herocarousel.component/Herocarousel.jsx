@@ -1,5 +1,6 @@
-import React from 'react'
+import React,{ useState, useEffect } from 'react'
 import HeroSlider from "react-slick";
+import axios from 'axios';
 
 // components
 import { NextArrow,PrevArrow } from "./Arrows.component"
@@ -7,7 +8,21 @@ import { NextArrow,PrevArrow } from "./Arrows.component"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+
 const Herocarousel = () => {
+  const [images, setImages] = useState([]);
+
+  useEffect( () => {
+    const requestNowPlayingMovies = async () => {
+      const getImages = await axios.get("/movie/now_playing")
+      setImages(getImages.data.results)    
+    }
+    
+    requestNowPlayingMovies();
+   }, []);
+
+
+
     const settingsLG = {
         arrows: true,
         autoplay: true,
@@ -31,17 +46,14 @@ const Herocarousel = () => {
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
       };
-    const images = ["https://in.bmscdn.com/promotions/cms/creatives/1626343774760_admissionrageproductionsfestival_webshowcase_1280x500.jpg",
-    "https://in.bmscdn.com/promotions/cms/creatives/1626086157424_diyartcraftliveworkshopforsunfeastyippee_webshowcase_1280x500_revised.jpg",
-    "https://in.bmscdn.com/promotions/cms/creatives/1626343774760_admissionrageproductionsfestival_webshowcase_1280x500.jpg",
-    "https://in.bmscdn.com/promotions/cms/creatives/1626529170453_mindgames_1280x500_ios.jpg"]
+    
     return (
         <>
             <div className="lg:hidden">
                  <HeroSlider {...settings}>
                 {images.map((image) => (
                   <div className="w-full h-56 md:h-80 py-3 ">
-                    <img src={image} alt="testing" className="w-full h-full" />
+                    <img src={`https://image.tmdb.org/t/p/original${image.backdrop_path}`} alt="testing" className="w-full h-full" />
                   </div>
                   ))}
                 </HeroSlider>
@@ -52,7 +64,7 @@ const Herocarousel = () => {
           {images.map((image) => (
             <div className="w-full h-96 px-2 py-3">
               <img
-                src={image}
+                src={`https://image.tmdb.org/t/p/original${image.backdrop_path}`}
                 alt="testing"
                 className="w-full h-full rounded-md"
               />
